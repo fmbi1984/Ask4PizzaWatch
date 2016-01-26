@@ -15,6 +15,7 @@ class IngredientesController: WKInterfaceController {
   
   var ingredientes:[String] = []
   
+  var cuenta:Int = 0
   
   @IBOutlet var btnSiguiente: WKInterfaceButton!
   
@@ -137,9 +138,22 @@ class IngredientesController: WKInterfaceController {
   }
   
   @IBAction func btnActionSiguiente() {
-//    for index in ingredientes {
-//      resultado!.append(index)
-//    }
-    pushControllerWithName("IngredientesSegue", context: resultado)
+    cuenta = 0
+    for _ in ingredientes {
+      //resultado!.append(index)
+        cuenta++
+    }
+    
+    if(cuenta<=5 && cuenta>=1)
+    {
+        pushControllerWithName("IngredientesSegue", context: resultado)
+    }
+    else
+    {
+        let buttonAction = WKAlertAction(title:"Aceptar", style: .Default) { () -> Void in
+        }
+        
+        presentAlertControllerWithTitle("Alerta", message:"Solo puedes elegir hasta 5 ingredientes", preferredStyle: .Alert, actions: [buttonAction]);
+    }
   }
 }
